@@ -3,7 +3,9 @@ __ PHP Calculator
 A simple, lightweight calculator built with PHP that performs the four basic arithmetic operations.
 
 __ Features
-
+- Power calculation
+- Percentage calculation
+- Input validation using `is_numeric()`
 - Addition, subtraction, multiplication, and division
 - Handles division-by-zero errors gracefully
 - Clean and RTL-friendly user interface
