@@ -1,19 +1,28 @@
 <?php
 function main (){
-    
+
     if ($_SERVER["REQUEST_METHOD"] !== "POST") return "";
 
-   switch ($_POST['op']) {
-    case '+': echo $_POST['num1'] + $_POST['num2']; break;
-    case '-': echo $_POST['num1'] - $_POST['num2']; break;
-    case '*': echo $_POST['num1'] * $_POST['num2']; break;
-    case '/': 
-        if ($_POST['num2'] == 0) 
-            echo "تقسیم بر صفر ممکن نیست";
-        else 
-            echo $_POST['num1'] / $_POST['num2'];
-        break;
-    }
+    if((is_numeric($_POST['num1']) && is_numeric($_POST['num2']))){
+        switch ($_POST['op']) {
+            case '+': return $_POST['num1'] + $_POST['num2']; 
+            case '-': return $_POST['num1'] - $_POST['num2']; 
+            case '*': return $_POST['num1'] * $_POST['num2']; 
+            case '**': return $_POST['num1'] ** $_POST['num2'];
+            case '%': return $_POST['num1'] * $_POST['num2'] / 100;
+
+            case '/': 
+                if ($_POST['num2'] == 0) 
+                    return "تقسیم بر صفر ممکن نیست";
+                else 
+                    return $_POST['num1'] / $_POST['num2'];
+                
+
+            default: return "عملگر نامعتبر است"; 
+        }
+
+    }else return "لطفا مقادیر عددی وارد کنید ";
+    
 }
 ?>
 <!DOCTYPE html>
@@ -35,10 +44,13 @@ function main (){
 
 <label>عملگر</label>
 <select name="op">
-<option value="+">+</option>
-<option value="-">-</option>
-<option value="*">×</option>
-<option value="/">÷</option>
+<option value="+">+ جمع</option>
+<option value="-">- تفریق</option>
+<option value="*">× ضرب</option>
+<option value="/">÷ تقسیم</option>
+<option value="**">توان</option>
+<option value="%" >% درصد</option>
+
 </select>
 
 <label>عدد دوم</label>
@@ -47,7 +59,7 @@ function main (){
 <button type="submit">محاسبه</button>
 </form>
 
-<div class="result">نتیجه: <?php main(); ?></div>
+<div class="result">نتیجه: <?php echo main(); ?></div>
 
 </div>
 
